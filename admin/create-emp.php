@@ -7,7 +7,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="../assets/images/airplane.png">
         <!-- slick css -->
         <link href="../assets/libs/slick-slider/slick/slick.css" rel="stylesheet" type="text/css" />
         <link href="../assets/libs/slick-slider/slick/slick-theme.css" rel="stylesheet" type="text/css" />
@@ -53,8 +53,7 @@
                         <!-- App Search-->
                         <form class="app-search d-none d-lg-block">
                             <div class="position-relative">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="mdi mdi-magnify"></span>
+                                <h1 style="color:#1560BD;">Admin Dashboard</h1>
                             </div>
                         </form>
                     </div>
@@ -98,9 +97,6 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-face-profile font-size-16 align-middle mr-1"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="mdi mdi-credit-card-outline font-size-16 align-middle mr-1"></i> Billing</a>
-                                <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Settings</a>
-                                <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
                             </div>
@@ -122,21 +118,21 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="index.html" class="waves-effect">
+                                <a href="create-emp.php" class="waves-effect" style="color:white">
                                     <i class="mdi mdi-view-dashboard"></i><span class="badge badge-pill badge-success float-right"></span>
                                     <span>Create Employees</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
+                                <a href="manage-emp.php" class=" waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span>Manage Employees</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
+                                <a href="view-flight-status.php" class=" waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span>View Flight Status</span>
                                 </a>
@@ -169,21 +165,51 @@
 
                         <!-- start page title -->
                         <div class="row">
-                            <!-- <div class="col-12">
-                                <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Dashboard</h4>
 
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
-                                            <li class="breadcrumb-item active">Dashboard</li>
-                                        </ol>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="config/insert-emp.php" method="post">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3>Create Employee Account</h3><br>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">First Name</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="example-text-input" name="first_name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Last Name</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="example-text-input" name="last_name">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Email Address</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="email" id="example-text-input" name="email">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Designation</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="example-text-input" name="desig">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Create</button>
                                     </div>
-                                    
                                 </div>
-                            </div> -->
-                        </div>     
+                                </form>
+                            </div>
+                        </div>
                         <!-- end page title -->
+
+
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
