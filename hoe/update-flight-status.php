@@ -178,15 +178,6 @@ session_start();
                                 <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
                                     UPDATE
                                 </button>
-                                <!-- <a href="update-flight-status.php"> -->
-                                <?php 
-                                    global $flag;
-                                    $flag = 0;
-                                ?>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                    CANCEL
-                                </button>
-                                <!-- </a> -->
                             </div>
                         </div>
                     </form>
@@ -317,13 +308,14 @@ session_start();
                                                         <td class="nr7"><?php echo $row["reason"]; ?></td>
                                                         <td>
                                                             <span class="use-address"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Update</button></span>
-                                                            <span class="use-address"><button type="button" class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">Cancel</button></span>
-                                                            <!-- <span>
+                                                            <!-- <span class="use-address"><button type="button" class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">Cancel</button></span> -->
+                                                            <span>
                                                             <form action="config/delete.php" style="display:inline;">
+                                                                <input type="text" name="f_id" value="<?php echo $row["flightid"]; ?>" readonly hidden/>
                                                                 <input type="email" name="email" value="<?php echo $row["email"]; ?>" readonly hidden/>
                                                                 <button type="submit" class="btn btn-outline-danger waves-effect waves-light">Cancel</button>
                                                             </form>
-                                                            </span> -->
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <?php
