@@ -2,11 +2,17 @@
 // include('../login/login.php');
 session_start();
 ?>
+<?php
+    $link = mysqli_connect("localhost", "root", "", "AAMS");
+    if($link === false){
+        die("ERROR: Could not connect. " . mysqli_connect_error());
+    }
+?>
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Dashboard</title>
+        <title>Your Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -57,7 +63,7 @@ session_start();
                         <!-- App Search-->
                         <form class="app-search d-none d-lg-block">
                             <div class="position-relative">
-                                <h1 style="color:#1560BD;">Admin Dashboard</h1>
+                                <h1 style="color:#1560BD;">Profile</h1>
                             </div>
                         </form>
                     </div>
@@ -122,25 +128,18 @@ session_start();
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="create-emp.php" class="waves-effect" style="color:white">
+                                <a href="admin-profile.php" class="waves-effect" style="color:white">
                                     <i class="mdi mdi-view-dashboard"></i><span class="badge badge-pill badge-success float-right"></span>
-                                    <span>Create Employees</span>
+                                    <span>Your Profile</span>
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="manage-emp.php" class=" waves-effect">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span>Manage Employees</span>
-                                </a>
-                            </li>
-
-                            <li>
+                            <!-- <li>
                                 <a href="view-flight-status.php" class=" waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i>
-                                    <span>View Flight Status</span>
+                                    <span>Go To Dashboard</span>
                                 </a>
-                            </li>
+                            </li> -->
 
                         </ul>
 
@@ -174,41 +173,83 @@ session_start();
 
                         <div class="row">
                             <div class="col-12">
-                                <form action="config/insert-emp.php" method="post">
+                                <?php
+                                    $mail = $_SESSION['email'];
+                                    $result = mysqli_query($link,"SELECT * FROM employees WHERE email='$mail'");
+                                    if (mysqli_num_rows($result) > 0) {
+                                ?>
+                                <?php
+                                        $i=0;
+                                        while($row = mysqli_fetch_array($result)) {
+                                ?>
+                                <form action="config/update-profile.php" method="post">
+                                
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3>Create Employee Account</h3><br>
+                                        <h3>View / Update Your Profile</h3><br>
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">First Name</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="example-text-input" name="first_name">
+                                                <input class="form-control" type="text" id="example-text-input" name="first_name" value="<?php echo $row["fname"]; ?>" readonly>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Last Name</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="example-text-input" name="last_name">
+                                                <input class="form-control" type="text" id="example-text-input" name="last_name" value="<?php echo $row["lname"]; ?>" readonly>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Email Address</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="email" id="example-text-input" name="email">
+                                                <input class="form-control" type="email" id="example-text-input" name="email" value="<?php echo $row["email"]; ?>" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Age</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="example-text-input" name="age" value="<?php echo $row["age"]; ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Address</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="example-text-input" name="addr" value="<?php echo $row["address"]; ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Mobile Number</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="example-text-input" name="mob_no" value="<?php echo $row["mobile_no"]; ?>">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Designation</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="example-text-input" name="desig">
+                                                <input class="form-control" type="text" id="example-text-input" name="desig" value="<?php echo $row["desig"]; ?>" readonly>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Create</button>
+                                        <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Update</button>
                                     </div>
                                 </div>
+                                
                                 </form>
+                                <?php
+                                    $i++;
+                                    }
+                                ?>
+                                <?php
+                                    }
+                                else{
+                                    echo "No result found";
+                                }
+                                ?>
                             </div>
                         </div>
                         <!-- end page title -->

@@ -1,4 +1,5 @@
 <?php
+// include('../login/login.php');
 session_start();
 ?>
 <?php
@@ -11,7 +12,7 @@ session_start();
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Dashboard</title>
+        <title>HOE Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -64,7 +65,7 @@ session_start();
                         <!-- App Search-->
                         <form class="app-search d-none d-lg-block">
                             <div class="position-relative">
-                                <h1 style="color:#1560BD;">Admin Dashboard</h1>
+                                <h1 style="color:#1560BD;">HOE Dashboard</h1>
                             </div>
                         </form>
                     </div>
@@ -126,49 +127,49 @@ session_start();
                     </div>  
                     <div class="modal-body">  
                     <!-- <p>This is a large modal.</p>   -->
-                    <form class="custom-validation" action="config/update-emp.php" method="POST">
+                    <form class="custom-validation" action="config/update-status.php" method="POST">
                         <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" class="form-control" id="fname" name="first_name" readonly/>
+                            <label>Flight ID</label>
+                            <input type="text" class="form-control" id="fname" name="f_id" readonly/>
                         </div>
 
                         <div class="form-group">
-                            <label>Last Name</label>
+                            <label>From</label>
                             <input type="text" class="form-control" id="lname" name="last_name" readonly/>
                         </div>
 
                         <div class="form-group">
                             <div>
-                                <label>Email-Id</label>
+                                <label>To</label>
                                 <input type="text" class="form-control" id="email" name="email" readonly />
                             </div>
                         </div>
     
                         <div class="form-group">
                             <div>
-                                <label>Age</label>
-                                <input type="text" class="form-control" id="age" readonly/>
+                                <label>Source (Timestamp)</label>
+                                <input type="text" class="form-control" id="age" name="src"/>
                             </div>
                         </div>
     
                         <div class="form-group">
-                            <label>Address</label>
+                            <label>Destination (Timestamp)</label>
                             <div>
-                                <input type="text" class="form-control" id="addr" readonly/>
+                                <input type="text" class="form-control" id="addr" name="des"/>
                             </div>
                         </div>          
     
                         <div class="form-group">
-                            <label>Mobile No</label>
+                            <label>State</label>
                             <div>
                                 <input type="text" class="form-control" id="mobno" readonly/>
                             </div>
                         </div>
     
                         <div class="form-group">
-                            <label>Designation</label>
+                            <label>Reason</label>
                             <div>
-                                <input type="text" class="form-control" id="desig" name="desig"/>
+                                <input type="text" class="form-control" id="desig" name="reason"/>
                             </div>
                         </div>
     
@@ -177,6 +178,15 @@ session_start();
                                 <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
                                     UPDATE
                                 </button>
+                                <!-- <a href="update-flight-status.php"> -->
+                                <?php 
+                                    global $flag;
+                                    $flag = 0;
+                                ?>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
+                                    CANCEL
+                                </button>
+                                <!-- </a> -->
                             </div>
                         </div>
                     </form>
@@ -187,6 +197,7 @@ session_start();
                 </div>  
                 </div>  
             </div>
+
             <!-- ========== Left Sidebar Start ========== -->
             <div class="vertical-menu">
                 <div data-simplebar class="h-100">
@@ -195,24 +206,11 @@ session_start();
                         <!-- Left Menu Start -->
                         <ul class="metismenu list-unstyled" id="side-menu">
                             <li class="menu-title">Menu</li>
-                            <li>
-                                <a href="create-emp.php" class="waves-effect">
-                                    <i class="mdi mdi-view-dashboard"></i><span class="badge badge-pill badge-success float-right"></span>
-                                    <span>Create Employees</span>
-                                </a>
-                            </li>
 
                             <li>
-                                <a href="manage-emp.php" class=" waves-effect">
+                                <a href="update-flight-status.php" class=" waves-effect" style="color:white">
                                     <i class="mdi mdi-view-dashboard"></i>
-                                    <span>Manage Employees</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="view-flight-status.php" class=" waves-effect" style="color:white">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span>View Flight Status</span>
+                                    <span>Manage Flight Status</span>
                                 </a>
                             </li>
 
@@ -256,7 +254,7 @@ session_start();
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3>View Flight Status</h3><br>
+                                        <h3>Manage Flight Status</h3><br>
                                         <div class="table-rep-plugin">
                                         <script>
                                             $(document).ready(function() {
@@ -291,6 +289,7 @@ session_start();
                                                             <input style="width:20%; display:inline;" class="form-control form-control-sm" type="text" placeholder="Search" id="filter">
                                                         </th>
                                                         <th data-priority="7">Reason</th>
+                                                        <th data-priority="8">#Actions</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -315,7 +314,17 @@ session_start();
                                                                 <?php
                                                             }
                                                         ?>
-                                                        <td class="nr6"><?php echo $row["reason"]; ?></td>
+                                                        <td class="nr7"><?php echo $row["reason"]; ?></td>
+                                                        <td>
+                                                            <span class="use-address"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Update</button></span>
+                                                            <span class="use-address"><button type="button" class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">Cancel</button></span>
+                                                            <!-- <span>
+                                                            <form action="config/delete.php" style="display:inline;">
+                                                                <input type="email" name="email" value="<?php echo $row["email"]; ?>" readonly hidden/>
+                                                                <button type="submit" class="btn btn-outline-danger waves-effect waves-light">Cancel</button>
+                                                            </form>
+                                                            </span> -->
+                                                        </td>
                                                     </tr>
                                                     <?php
                                                         $i++;
